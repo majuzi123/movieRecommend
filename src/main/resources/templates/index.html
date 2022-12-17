@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="./css/index_style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- Testimonials-Css -->
+    <link rel="stylesheet" href="./css/owl.theme.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/owl.carousel.css" type="text/css" media="screen" property="" />
+    <!-- font-awesome icons -->
+    <link href="../css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+
+</head>
+
+<body>
+<!-- banner首页头部背景 -->
+<div class="banner">
+    <!-- header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary pt-3">
+            <h1><a class="sign" href="/index">🌙 M O O N</a></h1>
+
+            <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link bg--black" href="/index">主页
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link bg--black" href="/movie">电影</a>
+                    </li>
+                    <li th:if="${session.status == 'logout'}" class="nav-item">
+                        <a class="nav-link bg--black" href="/login">登入</a>
+                    </li>
+                    <li th:if="${session.status == 'login'}" class="nav-item">
+                        <a class="nav-link bg--black" href="/logout">登出</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!--      底板的字-->
+    <div class="container">
+        <div class="banner-text">
+            <div class="slider-info">
+                <h3>电影&nbsp;<span> 永不</span>散场&nbsp;,&nbsp;热爱<span> 永不</span>褪色</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--banner form-->
+<!--	欢迎-->
+<section class="banner_form py-5">
+    <div class="container py-lg-3">
+        <div class="row ban_form">
+            <div class="col-lg-8 bg-white" >
+                <h2 class="heading-agileinfo">欢迎来到 <span> M O O N </span></h2>
+                <p class="vam">&nbsp&nbsp&nbsp&nbsp 在<span> M O O N </span>中你能够收获到------</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 第三部分-->
+<section class="choose py-5">
+    <div class="container py-md-4 mt-md-3">
+        <div class="row inner_w3l_agile_grids-1 ">
+            <div class="col-lg-6 w3layouts_choose_left_grid1">
+                <div class="choose_top">
+                    <h4 class="mb-3 mt-3 text-white">关于电影</h4>
+                    <p class ="text-white">&nbsp&nbsp&nbsp&nbsp电影是现实的渐近线，著名影评家安德烈·巴赞如是说道。在他看来，电影的诞生源自于人们对于永远保护美好事物不受时间摧残的愿望。</p>
+                    <p class ="text-white">&nbsp&nbsp&nbsp&nbsp而希腊电影大师西奥·安哲罗普洛斯说：“电影唯一能做的，就是让时间流逝变得甜美。”</p>
+                    <p class ="text-white">&nbsp&nbsp&nbsp&nbsp实际上电影包罗万象，各种类型都蕴含其中，制作者们的目的也不尽相同，这才是我们推荐不同的电影给不同人的意义所在不是吗？</p>
+
+                </div>
+            </div>
+            <div class="col-lg-6 w3layouts_choose_left_grid2">
+                <div class="row">
+                    <div class="col-md-6 w3l_choose_bottom1 mt-3 pt-md-4">
+                        <div class="choose_bottom_top">
+                            <h5 class="card-title text-uppercase my-3">欧洲电影</h5>
+                            <p class="card-text">通常相对于美国好莱坞商业片来说，欧洲的电影足够艺术，他们的创作是完全开放和变化的，是完全取决于创作者的个性和创作内容的。无论从戏剧角度、艺术角度、或是实验角度、欧洲电影都引领着电影史的发展和进步。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 w3l_choose_bottom2">
+                        <div class="choose_bottom_top">
+                            <h5 class="card-title text-uppercase my-3">美国好莱坞电影</h5>
+                            <p class="card-text">美国影视产业注重观众的利润，也就是说他们完全服务于观众的价值观。这不仅为美国带来巨额经济利益，带动了美国文化产业的发展，同时推销了美国的价值理念，营造了一个有利于国家形象传播的“美国文化群落和文化生态”。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 w3l_choose_bottom3 mt-3 pt-md-4">
+                        <div class="choose_bottom_top">
+                            <h5 class="card-title text-uppercase my-3">电影奖项</h5>
+                            <p class="card-text">欧洲三大国际电影节最高奖项金棕榈奖、金熊奖、金狮奖是电影领域的国际最高奖项。美国奥斯卡金像奖与欧洲三大国际电影节被誉为世界影坛最重要的四大电影奖项。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 w3l_choose_bottom4">
+                        <div class="choose_bottom_top">
+                            <h5 class="card-title text-uppercase my-3">国内电影起源</h5>
+                            <p class="card-text">中国电影诞生于1905年，历经了中国半封建、半殖民地时期，革命战争时期，新中国建设时期，文革时期，改革开放时期和全面建设小康社会新时期等各个历史阶段。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--我们的成就-->
+<section class="stats py-5">
+    <div class="container py-md-5">
+        <h3 class="heading-agileinfo text-center"><a href="about_us.html">
+            About <span>Us</span></a> </h3>
+    </div>
+</section>
+
+
+
+<footer>
+    <div class="copyright py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <p class="copy-right mt-2">&copy; MOON 2022 | All Right Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--//newsletter-->
+
+<!-- js -->
+<script src="./js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- carousel(for feedback) -->
+<script src="./js/owl.carousel.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 2,
+                    nav: false
+                },
+                1000: {
+                    items: 3,
+                    nav: true,
+                    loop: false,
+                    margin: 20
+                }
+            }
+        })
+    })
+</script>
+
+<!-- //carousel(for feedback) -->
+<!-- stats -->
+<script src="./js/jquery.waypoints.min.js"></script>
+<script src="./js/jquery.countmup.js"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats -->
+
+<!-- start-smooth-scrolling -->
+<script src="../js/move-top.js"></script>
+<script src="../js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<script src="./js/SmoothScroll.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.movie.mapper.UserMapper">
+
+    <!--登录 -->
+    <select id="getInfo" resultType="com.web.movie.entity.User">
+        MATCH (u:User)
+        WHERE u.userName=#{userName} and u.passWord=#{passWord}
+        RETURN
+            u.userName as userName,
+            u.passWord as passWord
+    </select>
+
+    <!--注册 -->
+    <select id="getUser" resultType="com.web.movie.entity.User">
+        MATCH (u:User)
+        WHERE u.userName=#{userName}
+        RETURN
+            u.userName as userName,
+            u.passWord as passWord
+    </select>
+
+    <insert id="addUser" parameterType="com.web.movie.entity.User">
+        CREATE (u:User)
+        SET u.userName=#{userName},u.passWord=#{passWord},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
+    </insert>
+
+</mapper>

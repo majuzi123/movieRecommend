@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.movie.mapper.MovieInfoMapper">
+
+    <select id="getNewMovies" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (n:Movie)
+        RETURN
+            id(n) as mid,
+            n.title as title,
+            n.rating as rating,
+            n.releasedata as releasedata,
+            n.introduction as introduction
+        ORDER BY n.rating DESC
+        LIMIT 6
+    </select>
+
+</mapper>
