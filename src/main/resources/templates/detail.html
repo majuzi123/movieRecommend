@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="./css/about_style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- Testimonials-Css -->
+    <link rel="stylesheet" href="./css/owl.theme.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/owl.carousel.css" type="text/css" media="screen" property=""/>
+    <!-- font-awesome icons -->
+    <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+</head>
+
+<style type="text/css">
+    .section-light {
+        background: #fff;
+    }
+
+    .section-dark {
+        background: #f7f7f7;
+    }
+
+    .section-light .b-box {
+        background: #F8FAFB;
+    }
+
+    .section-dark .b-box {
+        background: #fff;
+    }
+
+    .view {
+        border-color: #0b0b0b;
+        border-radius: 3px;
+        padding-left: 5px;
+        color: #0b0b0b;
+        size: auto;
+
+    }
+
+    .section-subHead {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0px 0 20px;
+    }
+
+    .hover-state:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 8px rgba(134, 151, 168, 0.1);
+    }
+
+    .btn:focus, .btn.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn.disabled, .btn:disabled {
+        opacity: 0.65;
+    }
+
+    .content {
+        font-size: 20px;
+        text-align: left;
+    }
+
+</style>
+<!-- banner 顶部背景-->
+
+<body style="background:rosybrown;">
+<!-- header -->
+<header >
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary pt-3">
+        <h1 style="padding-top: 30px;"><a class="sign" href="/index" style="font-size: 60px;padding-top: 40px;">🌙 M O O N</a></h1>
+        <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-top: 15px;">
+            <ul class="navbar-nav ml-auto" style="font-size: 20px">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/index" >主页</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/movie" >电影</a>
+                </li>
+                <li th:if="${session.status == 'logout'}" class="nav-item">
+                    <a class="nav-link" href="/login" >登入</a>
+                </li>
+                <li th:if="${session.status == 'login'}" class="nav-item">
+                    <a class="nav-link" href="/person" >个人中心</a>
+                </li>
+                <li th:if="${session.status == 'login'}" class="nav-item">
+                    <a class="nav-link" href="/logout" >登出</a>
+                </li>
+            </ul>
+        </div>
+        <br>
+    </nav>
+</header>
+
+
+<!--banner form-->
+<!-- //banner-text文字介绍 -->
+<section class="banner_bottom1 py-md-5" style="background:rosybrown;">
+    <div class="container py-4 mt-2">
+        <h3 class="heading-agileinfo text-center"/>
+        <div class="inner_sec_info_wthree_agile mt-md-5 pt-3">
+            <div class="row help_full">
+                <div class="col-lg-6 banner_bottom_grid help">
+                    <div class="col-lg-6 banner_bottom_right1">
+                        <div class="row">&nbsp&nbsp&nbsp&nbsp</div>
+                        <img height="420dp" width="300dp" th:src="@{'/poster/'+${movie.movieId}+'.jpg'}">
+                    </div>
+                </div>
+                <div class="col-lg-6 banner_bottom_left1" style="color: antiquewhite">
+                    <br>
+                    <h5 th:text="${movie.title}"/>
+                    <div class="content" style="color: antiquewhite">
+                        <br>
+                        <p th:text="'导演：'+${movie.directorList}"></p>
+                        <p th:text="'主演：'+${movie.actorList}"></p>
+                        <p th:text="'类型：'+${movie.genreList}"></p>
+                        <p th:text="'制片国家/地区：'+${movie.region}"></p>
+                        <p th:text="'语言：'+${movie.language}"></p>
+                        <p th:text="'上映时间：'+${movie.releaseYear}"></p>
+                        <p th:text="'简介：'+${movie.introduction}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+<section class="section section-dark section-services" id="services" style="background:rosybrown;">
+    <div class="container">
+        <div class="section-head"style="color: white">
+            <h2>相关影评</h2>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12 col-lg-12"  th:each="comment : ${commentList}">
+                    <p style="color: #ffffff" th:text="'用户：'+${comment.userName}+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp评分：'+${comment.grading}"></p>
+                    <p style="color: #ffffff" th:text="${comment.content}"></p>
+                <br>
+            </div>
+        </div>
+        <hr>
+        <div class="row" th:if="${session.status == 'login'}">
+            <div class="col-lg-12 text-center mt-5 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+                <div class="content" style="color: white">来发表你的影评吧！</div>
+                <br>
+                <form action="/submitComment" method="post">
+                    <div class="form-group" align="right">
+                        <label for="score" style="color: white">评&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <select class="form-control" id="score" name="score" style="background-color:rosybrown;color: #f8f9fa;width: 10%;">
+                            <option value="0" style="background-color: rosybrown">分数</option>
+                            <option value="1" style="background-color: rosybrown">1</option>
+                            <option value="2" style="background-color: rosybrown">2</option>
+                            <option value="3" style="background-color: rosybrown" selected="selected">3</option>
+                            <option value="4" style="background-color: rosybrown">4</option>
+                            <option value="5" style="background-color: rosybrown">5</option>
+                        </select>
+                        <br>
+                        <textarea name="content" cols="30" rows="3" class="view" wrap="virtual"style="border-color: white;color:white"></textarea>
+                        <br>
+                        <input type="submit" value="点击提交" class="btn btn-primary btn-user btn-block">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" th:if="${session.status == 'logout'}">
+            <p style="color: rgba(255,255,255,0.53)">登录后可发表评论</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center mt-5 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".5s">
+            </div>
+        </div>
+    </div>
+
+</section>
+<!--	copyright-->
+<footer class="copyright py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="copy-right mt-2">&copy; M O O N | All Right Reserved<a target="_blank"></a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- js -->
+<script src="./js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- start-smooth-scrolling -->
+<script src="./js/move-top.js"></script>
+<script src="./js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+
+</body>
+</html>

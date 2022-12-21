@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.movie.mapper.CommentMapper">
+
+    <!-- 插入影评-->
+    <insert id="insertComment" parameterType="com.web.movie.entity.Comment">
+        MATCH (u:User) WHERE u.userId = #{userId}
+        OPTIONAL MATCH (m:Movie) WHERE m.movieId= #{movieId}
+        CREATE (u)-[r:WRITED]-> (c:Comment)-[:COMMENT_OF]->(m)
+        SET c.commentId=id(c),c.content=#{comment.content},c.timeStamp=#{comment.timeStamp},c.grading=#{comment.grading},c.title=m.title
+    </insert>
+
+    <!--查询影评 -->
+    <select id="getCommentsByUser" resultType="com.web.movie.entity.Comment">
+        MATCH (u:User)-[:WRITED]->(c:Comment)-[:COMMENT_OF]->(m:Movie)
+        WHERE u.userId=#{user_id}
+        RETURN
+            c.commentId as commentId,
+            c.content as content,
+            c.grading as grading,
+            m.title as movieTitle
+        LIMIT 8
+    </select>
+
+    <select id="getCommentsByMovie" resultType="com.web.movie.entity.Comment">
+        MATCH (u:User)-[:WRITED]->(c:Comment)-[:COMMENT_OF]->(m:Movie)
+        WHERE m.movieId=#{movie_id}
+        RETURN
+            c.commentId as commentId,
+            c.content as content,
+            c.grading as grading,
+            m.title as movieTitle,
+            u.userName as userName
+        ORDER BY c.timeStamp DESC
+        LIMIT 10
+    </select>
+
+    <select id="getCommentCount" resultType="int">
+        MATCH(c:Comment)
+        RETURN count(c)
+    </select>
+
+    <!-- 删除电影评价-->
+    <delete id="deleteCommentById">
+        MATCH (u:User)-[r1:WRITED]->(c:Comment)-[r2:COMMENT_OF]->(m:Movie)
+        WHERE c.commentId=#{comment_id}
+        DETACH DELETE c
+    </delete>
+
+</mapper>

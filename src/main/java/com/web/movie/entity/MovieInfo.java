@@ -1,28 +1,37 @@
 package com.web.movie.entity;
 
+import java.util.List;
 
 public class MovieInfo {
 
-    private int mid;
+    private int movieId;
     private String title;
-    private String rating;
-    private String releasedata;
+    private String region;
+    private String language;
     private String introduction;
-
+    private String releaseYear;
+    private List<Genre> genreList;
+    private List<Actor> actorList;
+    private List<Director> directorList;
 
     public MovieInfo() {
     }
 
-    public MovieInfo(int mid, String title, String rating, String releasedata, String introduction) {
-        this.mid = mid;
+    public MovieInfo(int movieId, String title, String region, String language, String introduction,String releaseYear) {
+        this.movieId = movieId;
         this.title = title;
-        this.rating = rating;
-        this.releasedata = releasedata;
+        this.region = region;
+        this.language = language;
         this.introduction = introduction;
+        this.releaseYear = releaseYear;
     }
 
-    public int getMid() {
-        return mid;
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {
@@ -33,20 +42,20 @@ public class MovieInfo {
         this.title = title;
     }
 
-    public String getRating() {
-        return rating;
+    public String getRegion() {
+        return region;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getReleasedata() {
-        return releasedata;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setReleasedate(String releasedata) {
-        this.releasedata = releasedata;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public String getIntroduction() {
@@ -57,13 +66,40 @@ public class MovieInfo {
         this.introduction = introduction;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public String getReleaseYear() {
+        return releaseYear;
     }
 
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public String getGenreList() {
+        return genreList.toString();
+    }
+
+    public void setGenreList(List<Genre> genreList) {
+        this.genreList = genreList;
+    }
+
+    public String getActorList() {
+        return actorList.toString();
+    }
+
+    public void setActorList(List<Actor> actorList) {
+        this.actorList = actorList;
+    }
+
+    public String getDirectorList() {
+        return directorList.toString();
+    }
+
+    public void setDirectorList(List<Director> directorList) {
+        this.directorList = directorList;
+    }
     @Override
     public String toString() {
-        return "MovieInfo{" + "id=" + mid;
+        return "MovieInfo{" + "title=" + title;
     }
 }
 

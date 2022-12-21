@@ -188,7 +188,7 @@ ul.navbar-nav.ml-auto {
 /* //navigation */
 /*-- //header --*/
 .inner-banner {
-    background: url(../images/80.jpg)no-repeat;
+    background: url(../images/background.jpg)no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -200,7 +200,7 @@ ul.navbar-nav.ml-auto {
 /* banner */
 
 .banner {
-	background: url(../images/80.jpg) center no-repeat;
+	background: url(../images/background.jpg) center no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -621,7 +621,7 @@ h3.tittle {
 }
 /* news */
 .news {
-    background: url(../images/4.jpg) no-repeat center fixed;
+    background: url(../images/person.jpg) no-repeat center fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;

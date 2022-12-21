@@ -18,26 +18,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public User loginIn(String userName, String passWord) {
         passWord= DigestUtils.md5DigestAsHex(passWord.getBytes(StandardCharsets.UTF_8));
-        return userMapper.getInfo(userName, passWord);
+        return userMapper.getLoginInfo(userName, passWord);
     }
 
     @Override
-    public User getUser(String userName) {
-        return userMapper.getUser(userName);
+    public User getUserInfoById(int id) {
+        return userMapper.getUserInfoById(id);
     }
 
     @Override
-    public Boolean register(String userName, String passWord) {
-        User user = userMapper.getUser(userName);
+    public User getUserByName(String userName){
+        return userMapper.getUserByName(userName);
+    }
+
+    @Override
+    public int register(String userName, String passWord) {
+        User user = userMapper.getUserByName(userName);
         if (user == null) {
+            int count=userMapper.getUserCount();
             User newUser = new User();
+            newUser.setUserId(count+1);
             newUser.setUserName(userName);
             newUser.setPassWord(DigestUtils.md5DigestAsHex(passWord.getBytes(StandardCharsets.UTF_8)));
             userMapper.addUser(newUser);
-            return true;
+            return newUser.getUserId();
         } else {
-            return false;
+            return -1;
         }
+    }
+    public void updateUserInfo(User userInfo) {
+        userMapper.updateUserInfo(userInfo);
     }
 
 }

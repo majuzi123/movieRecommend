@@ -7,7 +7,18 @@
     <title>影院</title>
 
 
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css" media="all"/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+
+
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="./css/slicknav.min.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="./css/icofont.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="./css/owl.carousel.css">
@@ -17,26 +28,53 @@
     <link rel="stylesheet" type="text/css" href="./css/movie.css" media="all"/>
     <link rel="stylesheet" type="text/css" href="./css/register.css"/>
 
+
 </head>
-<body style="background:rosybrown;">
+
+<body style="background-color: rosybrown">
 
 <div>
     <!-- header -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary pt-3">
-            <h1><a class="sign" href="/index" style="font-size: 60px">🌙 M O O N</a></h1>
-
-            <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+    <header style="height: 80px;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary pt-3" style="padding-bottom: 16px;height: 72px;padding-left: 80px;padding-right: 80px;padding-top: 8px;">
+            <h1 style="padding-top: 30px;"><a class="sign" href="/index" style="font-size: 60px;padding-top: 40px;">🌙 M O O N</a></h1>
+            <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-top: 15px;">
+                <ul class="navbar-nav ml-auto" style="font-size: 20px">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/index" style="color: #FFFFFF">主页</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/movie" style="color: #FFFFFF">电影</a>
+                    </li>
+                    <li th:if="${session.status == 'logout'}" class="nav-item">
+                        <a class="nav-link" href="/login"  style="color: #FFFFFF">登入</a>
+                    </li>
+                    <li th:if="${session.status == 'login'}" class="nav-item">
+                        <a class="nav-link" href="/person"  style="color: #FFFFFF">个人中心</a>
+                    </li>
+                    <li th:if="${session.status == 'login'}" class="nav-item">
+                        <a class="nav-link" href="/logout"  style="color: #FFFFFF">登出</a>
+                    </li>
+                </ul>
+            </div>
             <br>
         </nav>
     </header>
 
-
+    <div class="header-right">
+        <div style="width:97%;padding-top: 8px;padding-right: 10px" align="right">
+            <form action="/search" method="post">
+                <select>
+                    <option value="Movies">Movies</option>
+                </select>
+                <input id="title" name="title" type="text"/>
+                <button>搜索</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <section class="hero-area" id="home">
@@ -154,12 +192,11 @@
 
                         <div class="col-md-4" th:each="movieInfo : ${newList}">
                             <span class="single-portfolio">
-                                <input type="hidden" id="id3" name="id" th:value="${movieInfo.mid}"/>
-                                <a th:href="@{/detail(id=${movieInfo.mid})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.mid}+'.jpg'}"/>
+                                <input type="hidden" id="id3" name="id" th:value="${movieInfo.movieId}"/>
+                                <a th:href="@{/detail(id=${movieInfo.movieId})}">
+                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title3" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
-                                <p id="year3" name="score" style="color:white;" th:text="${movieInfo.rating}"></p>
                             </span>
                         </div>
 
@@ -173,12 +210,11 @@
 
                         <div class="col-md-4" th:each="movieInfo : ${newList}">
                             <span class="single-portfolio">
-                                <input type="hidden" id="id2" name="id" th:value="${movieInfo.mid}"/>
-                                <a th:href="@{/detail(id=${movieInfo.mid})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.mid}+'.jpg'}"/>
+                                <input type="hidden" id="id2" name="id" th:value="${movieInfo.movieId}"/>
+                                <a th:href="@{/detail(id=${movieInfo.movieId})}">
+                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title2" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
-                                <p id="year2" name="score" style="color:white;" th:text="${movieInfo.rating}"></p>
                             </span>
                         </div>
 
@@ -192,12 +228,11 @@
 
                         <div class="col-md-4" th:each="movieInfo : ${newList}">
                             <span class="single-portfolio">
-                                <input type="hidden" id="id1" name="id" th:value="${movieInfo.mid}"/>
-                                <a th:href="@{/detail(id=${movieInfo.mid})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.mid}+'.jpg'}"/>
+                                <input type="hidden" id="id1" name="id" th:value="${movieInfo.movieId}"/>
+                                <a th:href="@{/detail(id=${movieInfo.movieId})}">
+                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title1" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
-                                <p id="year1" name="score" style="color:white;" th:text="${movieInfo.rating}"></p>
                             </span>
                         </div>
 

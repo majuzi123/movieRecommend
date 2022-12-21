@@ -615,7 +615,7 @@ b, strong {
 .section-home {
     height: 100vh;
     position: relative;
-    background-image: url("../images/4.jpg");
+    background-image: url("../images/person.jpg");
     background-size: cover;
     background-position: center;
 }

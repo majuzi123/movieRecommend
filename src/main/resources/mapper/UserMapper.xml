@@ -3,16 +3,27 @@
 <mapper namespace="com.web.movie.mapper.UserMapper">
 
     <!--登录 -->
-    <select id="getInfo" resultType="com.web.movie.entity.User">
+    <select id="getLoginInfo" resultType="com.web.movie.entity.User">
         MATCH (u:User)
         WHERE u.userName=#{userName} and u.passWord=#{passWord}
         RETURN
-            u.userName as userName,
-            u.passWord as passWord
+              u.userId as userId,
+              u.userName as userName
     </select>
 
     <!--注册 -->
-    <select id="getUser" resultType="com.web.movie.entity.User">
+    <select id="getUserInfoById" resultType="com.web.movie.entity.User">
+        MATCH (u:User)
+        WHERE u.userId=#{id}
+        RETURN
+            u.userId as userId,
+            u.userName as userName,
+            u.QQNumber as QQNumber,
+            u.email as email,
+            u.age as age
+    </select>
+
+    <select id="getUserByName" resultType="com.web.movie.entity.User">
         MATCH (u:User)
         WHERE u.userName=#{userName}
         RETURN
@@ -20,9 +31,19 @@
             u.passWord as passWord
     </select>
 
+    <select id="getUserCount" resultType="int">
+        MATCH (u:User) RETURN count(u)
+    </select>
+
     <insert id="addUser" parameterType="com.web.movie.entity.User">
         CREATE (u:User)
-        SET u.userName=#{userName},u.passWord=#{passWord},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
+        SET u.userId=#{userId},u.userName=#{userName},u.passWord=#{passWord},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
     </insert>
+
+    <update id="updateUserInfo" parameterType="com.web.movie.entity.User">
+        MATCH (u:User)
+        WHERE u.userId=#{userId}
+        SET u.userName=#{userName},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
+    </update>
 
 </mapper>

@@ -28,11 +28,11 @@ Description: Online Movie,Vedio and TV Show HTML Template
 ----------------------------------*/
 .nav-item .nav-link {
     color: #ffffff;
-    background-color: #ffffff;
+    background-color: rosybrown;
     border-color: #dee2e6 #dee2e6 #ffffff;
 }
 .banner {
-    background: url(../images/80.jpg) center no-repeat;
+    background: url(../images/background.jpg) center no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

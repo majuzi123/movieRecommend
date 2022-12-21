@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <title>详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta name="keywords" content=""/>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- Custom Theme files -->
+    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="./css/about_style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="./css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="./css/index_style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- Testimonials-Css -->
+    <link rel="stylesheet" href="./css/owl.theme.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/owl.carousel.css" type="text/css" media="screen" property=""/>
+    <!-- font-awesome icons -->
+    <link href="./css/fontawesome-all.min.css" rel="stylesheet">
+    <!-- //Custom Theme files -->
+</head>
+
+<style type="text/css">
+    .section-light {
+        background: #fff;
+    }
+
+    .section-dark {
+        background: #f7f7f7;
+    }
+
+    .section-light .b-box {
+        background: #F8FAFB;
+    }
+
+    .section-dark .b-box {
+        background: #fff;
+    }
+
+    .view {
+        border-color: #0b0b0b;
+        border-radius: 3px;
+        padding-left: 5px;
+        color: #0b0b0b;
+        size: auto;
+
+    }
+
+    .section-subHead {
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0px 0 20px;
+    }
+
+    .hover-state:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 8px rgba(134, 151, 168, 0.1);
+    }
+
+    .btn:focus, .btn.focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .btn.disabled, .btn:disabled {
+        opacity: 0.65;
+    }
+
+    .content {
+        font-size: 20px;
+        text-align: left;
+    }
+
+    .zpf {
+        background-color: black;
+    }
+</style>
+
+
+<body style="background-color: rosybrown">
+<div>
+    <header >
+        <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary pt-3">
+            <h1 style="padding-top: 30px;"><a class="sign" href="/index" style="font-size: 60px;padding-top: 40px;">🌙 M O O N</a></h1>
+            <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="padding-top: 15px;">
+                <ul class="navbar-nav ml-auto" style="font-size: 20px">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/index" >主页
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/movie" >电影</a>
+                    </li>
+                    <li th:if="${session.status == 'logout'}" class="nav-item">
+                        <a class="nav-link" href="/login" >登入</a>
+                    </li>
+                    <li th:if="${session.status == 'login'}" class="nav-item">
+                        <a class="nav-link" href="/person" >个人中心</a>
+                    </li>
+                    <li th:if="${session.status == 'login'}" class="nav-item">
+                        <a class="nav-link" href="/logout" >登出</a>
+                    </li>
+                </ul>
+            </div>
+            <br>
+        </nav>
+    </header>
+
+</div>
+
+<br><br><br><br>
+<br>
+
+<div align="center" style="background-color: rosybrown">
+    <form action="/search" method="post">
+        <input type="text" name="title" placeholder="搜索电影" style="width: 40%;height: 45px">
+        <button style="height: 45px">搜 索</button>
+    </form>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+
+        <span class="single-portfolio" th:each="movieInfo : ${searchList}">
+            <div class="row">
+                <div class="col-md-6 ">
+                    <input type="hidden" id="id" name="id" th:value="${movieInfo.movieId}"/>
+                    <a th:href="@{/detail(id=${movieInfo.movieId})}">
+                        <img height="420dp" width="300dp" style="position:relative;left:227px"
+                             th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
+                    </a>
+                </div>
+                <div class="col-md-6 ">
+                    <h2>
+                        <br><br><br><br>
+                        <p id="title" name="title" th:text="${movieInfo.title}" style="color: white">aaa</p>
+                    </h2>
+                    <p id="score" name="score" th:text="${movieInfo.releaseYear}" style="color:white">10</p>
+                </div>
+            </div>
+            <br>
+        </span>
+</div>
+
+
+</body>
+</html>

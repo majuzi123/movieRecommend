@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人中心</title>
+    <meta name="description" content="Tam - Creative Portfolio Template"/>
+    <meta name="keywords"
+          content="blog, business card, creative, creative portfolio, cv theme, online resume, personal, portfolio, professional cv, responsive portfolio, resume, resume theme, vcard"/>
+    <meta name="author" content="beingeorge"/>
+    <meta name="theme-color" content="#2a2d35">
+
+    <!-- Vendor Css-->
+    <link rel="stylesheet" href="./css/person.vendor.css"/>
+    <link rel="stylesheet" href="./css/person.LineIcons.min.css"/>
+
+    <!-- TamTemplate style Css -->
+    <link href="./css/person.tam.css" rel="stylesheet">
+
+    <!-- Custom style Css -->
+    <link href="./css/person.custom.css" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+
+<!-- START: Preloader -->
+<div id="preloader" class="preloader">
+    <div class="spinner-grow text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<!-- END: Preloader -->
+
+<!-- 边框信息 -->
+<aside class="aside">
+    <!-- START: NAVBAR -->
+
+    <div class="nav-wrapper">
+        <nav class="navbar text-center align-items-center justify-content-center">
+
+            <div class="collapse navbar-collapse show" id="navbarCollapse">
+                <div class="about-avatar-details mt-4">
+                    <a href="/movie"><h1>返回电影</h1>
+                    </a>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse show" id="navbarCollapse1">
+                <div class="about-avatar mb-5">
+                    <a href="/person">
+                        <img src="./images/person.jpg" alt="" class="img-fluid mx-auto d-block shadow-sm rounded-full">
+                    </a>
+                    <div class="about-avatar-details mt-4">
+                        <h1 th:text="${user.userName}"></h1>
+                        <p class="badge" th:text="'ID: '+${user.userId}"></p>
+                    </div>
+                </div>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/index"><i class="lni-home"></i>个人信息</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        </nav>
+    </div>
+    <!-- END: NAVBAR -->
+</aside>
+<!-- 边框信息 -->
+
+<!--间隔左边-->
+<div class="page-overlay">
+    <span class="overlay-1"></span>
+    <span class="overlay-2"></span>
+</div>
+<!--   间隔右边-->
+<div class="page-wrapper">
+    <!-- START: HOME -->
+
+    <!-- END: HOME -->
+
+    <!-- START: ABOUT -->
+    <section class="section section-about" id="about">
+        <div class="container">
+            <div class="section-head">
+                <span>Get to know</span>
+                <h2>个人资料</h2>
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6">
+                    <div class="about-desc wow fadeInUp" data-wow-duration="1s" data-wow-delay="500ms">
+                        <form action="/reverse" method="post">
+                            <input type="hidden" id="userId" name="userId" th:value="${user.userId}">
+                            <div class="about-desc-more text-left mt-5">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="about-desc-info">
+                                            <b>Name : </b>
+                                            <input id="userName" name="userName" th:value="${user.userName}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="about-desc-info">
+                                            <b>Age : </b>
+                                            <input id="age" name="age" th:value="${user.age}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="about-desc-info">
+                                            <b>Email : </b>
+                                            <input id="email" name="email" th:value="${user.email}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="about-desc-info">
+                                            <b>QQ : </b>
+                                            <input id="QQNumber" name="QQNumber" th:value="${user.QQNumber}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 text-center mt-5 wow fadeInUp" data-wow-duration="1.5s"
+                                     data-wow-delay=".5s">
+                                    <input type="submit" value="点击修改" class="btn hover-state">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-dark section-services" id="services">
+        <div class="container">
+            <div class="section-head">
+                <span>WHAT I WRITE</span>
+                <h2>我的评论</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-lg-12" th:each="comment : ${commentList}">
+                    <p th:text="'电影：'+${comment.movieTitle}+'&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp评分：'+${comment.grading}"></p>
+                    <p th:text="${comment.content}"></p>
+                    <a th:href="@{/delete(comment_id=${comment.commentId})}">
+                        <div align="right">
+                            <p class="btn hover-state btn-link btn-xs " align="right">删除评论</p>
+                        </div>
+                    </a>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--FOOTER-->
+    <footer class="footer section section-light">
+        <div class="container">
+            <p class="copyright text-center mb-0">&copy; MOON 2022 | All Right Reserved</p>
+        </div>
+    </footer>
+    <!--FOOTER-->
+</div>
+<!--	右边结束-->
+
+
+<!-- JAVASCRIPTS -->
+
+<script src="./js/person.vendor.js"></script>
+
+<!-- Map -->
+<script src="./js/person.map.js"></script>
+<script src="https://ditu.google.cn/maps/api/js?key=AIzaSyD79MY72taVRlZVX2DU6L5PXOh3ezUUKMc&amp;callback=initMap"
+        async="" defer=""></script>
+
+<!-- Custom Js -->
+<script src="./js/person.custom.js"></script>
+</body>
+</html>

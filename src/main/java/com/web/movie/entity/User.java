@@ -1,6 +1,7 @@
 package com.web.movie.entity;
 
 public class User {
+    private int userId;
     private String userName;
     private String passWord;
     private String QQNumber;
@@ -13,6 +14,14 @@ public class User {
         this.QQNumber="";
         this.email="";
         this.age=0;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getQQNumber() {
@@ -53,5 +62,15 @@ public class User {
 
     public void setPassWord(String passWord) {
         this.passWord = passWord;
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", QQNumber='" + QQNumber + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

@@ -1,5 +1,8 @@
 package com.web.movie.service.impl;
 
+import com.web.movie.entity.Actor;
+import com.web.movie.entity.Director;
+import com.web.movie.entity.Genre;
 import com.web.movie.entity.MovieInfo;
 import com.web.movie.mapper.MovieInfoMapper;
 import com.web.movie.service.MovieInfoService;
@@ -16,6 +19,22 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     @Override
     public List<MovieInfo> getNewMovies() {
         return movieInfoMapper.getNewMovies();
+    }
+    public MovieInfo getMovieById(int movie_id) {
+        return movieInfoMapper.getMovieById(movie_id);
+    }
+
+    public List<MovieInfo> getMovieByTitle(String movie_title) {
+        return movieInfoMapper.getMovieByTitle(movie_title);
+    }
+    public List<Genre> getGenreById(int movie_id){
+        return movieInfoMapper.getGenreById(movie_id);
+    }
+    public List<Actor> getActorsById(int movie_id){
+        return movieInfoMapper.getActorsById(movie_id);
+    }
+    public List<Director> getDirectorsById(int movie_id){
+        return movieInfoMapper.getDirectorsById(movie_id);
     }
 
 }

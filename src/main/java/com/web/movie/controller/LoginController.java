@@ -25,8 +25,10 @@ public class LoginController {
     public String login(String userName, String passWord, ModelMap map, HttpSession session) throws Exception{
         User user = userService.loginIn(userName, passWord);
         if (user != null) {
+            System.out.println("登录用户："+user);
             session.setAttribute("status", "login");
-            session.setAttribute("id", user.getUserName());
+            session.setAttribute("id", user.getUserId());
+            session.setAttribute("name",userName);
             return "index";
         } else {
             map.addAttribute("flag", "yes");
@@ -48,9 +50,11 @@ public class LoginController {
 
     @RequestMapping(value = "/registerIn", method = RequestMethod.POST)
     public String register(String userName,String passWord, HttpSession session) throws Exception{
-        if (userService.register(userName,passWord)) {
+        int newUserId = userService.register(userName,passWord);
+        if (newUserId !=-1) {
             session.setAttribute("status", "login");
-            session.setAttribute("id", userName);
+            session.setAttribute("id", newUserId);
+            session.setAttribute("name",userName);
             return "index";
         } else {
             return "register";

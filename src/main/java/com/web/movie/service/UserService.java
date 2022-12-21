@@ -6,9 +6,12 @@ public interface UserService {
 
     User loginIn(String userName, String passWord);
 
-    User getUser(String userName);
+    User getUserInfoById(int id);
 
-    Boolean register(String userName, String passWord);
+    User getUserByName(String userName);
+
+    int register(String userName, String passWord);
+    void updateUserInfo(User userInfo);
 
 
 }
