@@ -3,6 +3,8 @@ package com.web.movie.mapper;
 import com.web.movie.entity.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface UserMapper {
 
      User getLoginInfo(@Param("userName") String userName, @Param("passWord") String passWord);
@@ -17,4 +19,5 @@ public interface UserMapper {
 
      void updateUserInfo(User userInfo);
 
+    List<User> getUsersByComment(int user_id);
 }

@@ -1,6 +1,7 @@
 package com.web.movie.controller;
 
 import com.web.movie.entity.MovieInfo;
+import com.web.movie.entity.User;
 import com.web.movie.service.MovieInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,10 @@ public class MovieController {
             List<MovieInfo> list=movieInfoService.getHighScoreMovies();
             map.addAttribute("list",list);
         }*/
+        int id = (int) session.getAttribute("id");
 
-        List<MovieInfo> newList=movieInfoService.getNewMovies();
+        List<MovieInfo> newList=movieInfoService.getRecommendMovies(id);
+        //List<MovieInfo> newList=movieInfoService.getNewMovies();
         map.addAttribute("newList",newList);
 
         map.addAttribute("list",newList);
