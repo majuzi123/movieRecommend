@@ -25,7 +25,17 @@
             n.introduction as introduction,
             n.releaseYear as releaseYear
     </select>
-
+    <select id="getMovieInfoByTitle" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (n:Movie)
+        WHERE n.title = #{movie_title}
+        RETURN
+        n.movieId as movieId,
+        n.title as title,
+        n.region as region,
+        n.language as language,
+        n.introduction as introduction,
+        n.releaseYear as releaseYear
+    </select>
     <select id="getMovieByTitle" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n:Movie)
         WHERE n.title contains #{movie_title}
