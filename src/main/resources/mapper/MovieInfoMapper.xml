@@ -60,5 +60,17 @@
               p.name as name
     </select>
 
-
+    <select id="getNewMovieByGenre" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (n:Movie)-[:IS_TYPE_OF]->(g:Genre)
+        WHERE g.gId=#{genre_id}
+        RETURN
+            n.movieId as movieId,
+            n.title as title,
+            n.region as region,
+            n.language as language,
+            n.introduction as introduction,
+            n.releaseYear as releaseYear
+        Order by n.releaseYear DESC
+        LIMIT 6
+    </select>
 </mapper>

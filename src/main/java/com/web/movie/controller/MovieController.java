@@ -29,10 +29,19 @@ public class MovieController {
         }*/
 
         List<MovieInfo> newList=movieInfoService.getNewMovies();
-        map.addAttribute("newList",newList);
+        List<MovieInfo> newDramaMovies=movieInfoService.getNewMovieByGenre(0);
+        List<MovieInfo> newLoveMovies=movieInfoService.getNewMovieByGenre(1);
+        List<MovieInfo> newActionMovies=movieInfoService.getNewMovieByGenre(2);
+        List<MovieInfo> newHistoryMovies=movieInfoService.getNewMovieByGenre(3);
 
+        map.addAttribute("newList",newList);
         map.addAttribute("list",newList);
         map.addAttribute("highList",newList);
+
+        map.addAttribute("newDramaMovies",newDramaMovies);
+        map.addAttribute("newLoveMovies",newLoveMovies);
+        map.addAttribute("newActionMovies",newActionMovies);
+        map.addAttribute("newHistoryMovies",newHistoryMovies);
 
         //List<MovieInfo> highList=movieInfoService.getHighScoreMovies();
         //map.addAttribute("highList",highList);

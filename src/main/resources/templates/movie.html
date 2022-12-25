@@ -177,24 +177,65 @@
             <div class="col-lg-6 text-left text-lg-right">
                 <div class="portfolio-menu">
                     <ul>
-                        <li data-filter=".best" style="color:white;" onclick="showm3()">评分最高</li>
-                        <li data-filter=".new" style="color:white;" onclick="showm2()">最新上线</li>
+                        <li data-filter=".drama" style="color:white;" onclick="showm5()">剧情</li>
+                        <li data-filter=".love" style="color:white;" onclick="showm4()">爱情</li>
+                        <li data-filter=".action" style="color:white;" onclick="showm3()">动作</li>
+                        <li data-filter=".history" style="color:white;" onclick="showm2()">历史</li>
                         <li data-filter=".personal" style="color:white;" onclick="showm1()">个性推荐</li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row portfolio-item">
-
-            <div class="best" id="m3">
+            <div class="drama" id="m5">
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-4" th:each="movieInfo : ${newList}">
+                        <div class="col-md-4" th:each="movieInfo : ${newDramaMovies}">
+                            <span class="single-portfolio">
+                                <input type="hidden" id="id5" name="id" th:value="${movieInfo.movieId}"/>
+                                <a th:href="@{/detail(id=${movieInfo.movieId})}">
+<!--                                    暂用填充图片-->
+                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>
+<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                </a>
+                                <p id="title5" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="love" id="m4">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4" th:each="movieInfo : ${newLoveMovies}">
+                            <span class="single-portfolio">
+                                <input type="hidden" id="id4" name="id" th:value="${movieInfo.movieId}"/>
+                                <a th:href="@{/detail(id=${movieInfo.movieId})}">
+                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>
+<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                </a>
+                                <p id="title4" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="action" id="m3">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-4" th:each="movieInfo : ${newActionMovies}">
                             <span class="single-portfolio">
                                 <input type="hidden" id="id3" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
+                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>
+<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
                                 </a>
                                 <p id="title3" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -204,15 +245,16 @@
                 </div>
             </div>
 
-            <div class="new" id="m2">
+            <div class="history" id="m2">
                 <div class="container">
                     <div class="row">
 
-                        <div class="col-md-4" th:each="movieInfo : ${newList}">
+                        <div class="col-md-4" th:each="movieInfo : ${newHistoryMovies}">
                             <span class="single-portfolio">
                                 <input type="hidden" id="id2" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
+                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>
+<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
                                 </a>
                                 <p id="title2" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -230,7 +272,8 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id1" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
+                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>
+<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
                                 </a>
                                 <p id="title1" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -286,6 +329,8 @@
     $(document).ready(function () {
         $("#m1").hide();
         $("#m2").hide();
+        $("#m3").hide();
+        $("#m4").hide();
     })
 
 
@@ -299,6 +344,14 @@
 
     function showm3() {
         $("#m3").show();
+    }
+
+    function showm4() {
+        $("#m4").show();
+    }
+
+    function showm5() {
+        $("#m5").show();
     }
 
 </script>
