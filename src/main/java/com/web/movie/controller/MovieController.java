@@ -1,6 +1,7 @@
 package com.web.movie.controller;
 
 import com.web.movie.entity.MovieInfo;
+import com.web.movie.entity.User;
 import com.web.movie.service.MovieInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

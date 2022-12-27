@@ -13,10 +13,7 @@ public class User {
     private String email;
     private int age;
 
-    CommentService commentService;
-    UserService userService;
-    public  List<Comment> movieList = commentService.getCommentsByUser(userId);
-     public List<User> userList = userService.getUsersByComment(userId);
+
     public User(){
         this.userName="";
         this.passWord="";
@@ -84,7 +81,7 @@ public class User {
     }
 
 
-    public Comment find(String movieName) {
+    public Comment find(String movieName,List<Comment> movieList) {
         for (Comment movie : movieList) {
             if (movie.getMovieTitle().equals(movieName)) {
                 return movie;

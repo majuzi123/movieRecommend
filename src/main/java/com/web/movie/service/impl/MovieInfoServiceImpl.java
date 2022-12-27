@@ -20,9 +20,20 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     public List<MovieInfo> getNewMovies() {
         return movieInfoMapper.getNewMovies();
     }
+
+    @Override
+    public List<MovieInfo> getRecommendMovies(int id) {
+        return null;
+    }
+
     @Override
     public MovieInfo getMovieById(int movie_id) {
         return movieInfoMapper.getMovieById(movie_id);
+    }
+
+    @Override
+    public MovieInfo getMovieInfoByTitle(String movie_title) {
+        return null;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.web.movie.recommend;
 
 import com.web.movie.entity.Comment;
 import com.web.movie.entity.User;
+import com.web.movie.service.CommentService;
 import com.web.movie.service.MovieInfoService;
 
 import java.util.*;
@@ -13,25 +14,25 @@ import java.util.stream.IntStream;
 public class Recommend {
     /**
      * 在给定username的情况下，计算其他用户和它的距离并排序
-     * @param username
+     * //@param username
      * @return
      */
-    MovieInfoService movieInfoService;
-    private Map<Double, String> computeNearestNeighbor(User user) {
+    CommentService commentService;
+    private Map<Double, String> computeNearestNeighbor(User user,List<User> userList) {
         Map<Double, String> distances = new TreeMap<>();
 
         User u1 = new User();
-        for (User i:user.userList) {
+        for (User i:userList) {
             if (user.getUserId()==i.getUserId()) {
                 u1 = i;
             }
         }
 
-        for (int i = 0; i < user.userList.size(); i++) {
-            User u2 = user.userList.get(i);
+        for (int i = 0; i < userList.size(); i++) {
+            User u2 = userList.get(i);
 
             if (u2.getUserId()!=user.getUserId()) {
-                double distance = pearson_dis(u2.movieList, u1.movieList);
+                double distance = pearson_dis(commentService.getCommentsByUser(u1.getUserId()),  commentService.getCommentsByUser(u1.getUserId()));
                 distances.put(distance, u2.getUserName());
             }
 
@@ -65,15 +66,15 @@ public class Recommend {
     }
 
 
-    public List<Comment> recommend(User user) {
+    public List<Comment> recommend(User user,List<User> userList) {
         //找到最近邻
-        Map<Double, String> distances = computeNearestNeighbor(user);
+        Map<Double, String> distances = computeNearestNeighbor(user,userList);
         String nearest = distances.values().iterator().next();
         //System.out.println("最近邻 -> " + nearest);
 
         //找到最近邻看过，但是我们没看过的电影，计算推荐
         User neighborRatings = new User();
-        for (User i : user.userList) {
+        for (User i : userList) {
             if (nearest.equals(i.getUserName())) {
                 neighborRatings = i;
             }
@@ -81,7 +82,7 @@ public class Recommend {
         //System.out.println("最近邻看过的电影 -> " + neighborRatings.movieList);
 
         User userRatings = new User();
-        for (User i :user.userList) {
+        for (User i :userList) {
             if (user.getUserName().equals(i.getUserName())) {
                 userRatings = i;
             }
@@ -90,8 +91,8 @@ public class Recommend {
 
         //根据自己和邻居的电影计算推荐的电影
         List<Comment> recommendationMovies = new ArrayList<>();
-        for (Comment movie : neighborRatings.movieList) {
-            if (userRatings.find(movie.getMovieTitle()) == null) {
+        for (Comment movie : commentService.getCommentsByUser(neighborRatings.getUserId())) {
+            if (userRatings.find(movie.getMovieTitle(),commentService.getCommentsByUser(userRatings.getUserId())) == null) {
                 recommendationMovies.add(movie);
             }
         }
