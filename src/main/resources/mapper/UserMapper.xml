@@ -37,8 +37,8 @@
 
     <!--查询评价过相同电影的用户 -->
     <select id="getUsersByComment" resultType="com.web.movie.entity.User">
-        MATCH (u1:User)-[:WRITED]->(:Comment)-[:COMMENT_OF]->(m:Movie) <-[:COMMENT_OF]-(:Comment)<-[:WRITED]-(u2:User)
-        WHERE u1.userId=#{user_id} and  u2.userId <> u1.userId
+        MATCH (u1:User)-[:WRITED]->(:Comment)-[:COMMENT_OF]->(m:Movie) &lt;-[:COMMENT_OF]-(:Comment)&lt;-[:WRITED]-(u2:User)
+        WHERE u1.userId=#{user_id} and  u2.userId &lt;&gt; u1.userId
         RETURN
         u2.userId as userId,
         u2.userName as userName,
