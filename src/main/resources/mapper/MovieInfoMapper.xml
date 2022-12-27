@@ -27,16 +27,11 @@
     </select>
 
     <select id="getMovieByTitle" resultType="com.web.movie.entity.MovieInfo">
-        MATCH (n:Movie)
-        WHERE n.title contains #{movie_title}
+        CALL db.index.fulltext.queryNodes("movieTitleIndex",#{movie_title}) yield node
         RETURN
-            n.movieId as movieId,
-            n.title as title,
-            n.region as region,
-            n.language as language,
-            n.introduction as introduction,
-            n.releaseYear as releaseYear
-        Order by n.releaseYear DESC
+            node.movieId as movieId,
+            node.title as title
+        LIMIT 10
     </select>
 
     <select id="getGenreById" resultType="com.web.movie.entity.Genre">
