@@ -1,8 +1,11 @@
 package com.web.movie.service.impl;
 
+import com.web.movie.entity.Comment;
 import com.web.movie.entity.User;
 import com.web.movie.mapper.UserMapper;
+import com.web.movie.service.CommentService;
 import com.web.movie.service.UserService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -11,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+  
     @Autowired(required = false)
     private UserMapper userMapper;
 
@@ -48,6 +51,11 @@ public class UserServiceImpl implements UserService {
     }
     public void updateUserInfo(User userInfo) {
         userMapper.updateUserInfo(userInfo);
+    }
+
+    @Override
+    public List<User> getUsersByComment(int user_id) {
+        return userMapper.getUsersByComment(user_id);
     }
 
 }

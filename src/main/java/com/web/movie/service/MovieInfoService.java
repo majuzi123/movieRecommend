@@ -9,7 +9,9 @@ import java.util.List;
 public interface MovieInfoService {
 
     List<MovieInfo> getNewMovies();
+    List<MovieInfo> getRecommendMovies(int id);
     MovieInfo getMovieById(int movie_id);
+    MovieInfo getMovieInfoByTitle(String movie_title);
     List<MovieInfo> getMovieByTitle(String movie_title);
     List<Genre> getGenreById(int movie_id);
     List<Actor> getActorsById(int movie_id);

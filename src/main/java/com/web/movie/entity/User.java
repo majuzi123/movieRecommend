@@ -1,5 +1,10 @@
 package com.web.movie.entity;
 
+import com.web.movie.service.CommentService;
+import com.web.movie.service.UserService;
+
+import java.util.List;
+
 public class User {
     private int userId;
     private String userName;
@@ -7,6 +12,7 @@ public class User {
     private String QQNumber;
     private String email;
     private int age;
+
 
     public User(){
         this.userName="";
@@ -72,5 +78,15 @@ public class User {
                 ", QQNumber='" + QQNumber + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+
+    public Comment find(String movieName,List<Comment> movieList) {
+        for (Comment movie : movieList) {
+            if (movie.getMovieTitle().equals(movieName)) {
+                return movie;
+            }
+        }
+        return null;
     }
 }
