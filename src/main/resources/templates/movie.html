@@ -194,10 +194,7 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id5" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-<!--                                    暂用填充图片-->
-<!--                                    <img height="300dp" width="200dp" src="./images/movie/slide/9.jpg"/>-->
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
-<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                    <img height="300px" width="200px" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title5" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -214,9 +211,7 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id4" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-                                    <!--<img height="300dp" width="200dp" src="./images/movie/slide/11.jpg"/>-->
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
-<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                    <img height="300px" width="200px" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title4" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -233,9 +228,7 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id3" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-<!--                                    <img height="300dp" width="200dp" src="./images/movie/slide/7.jpg"/>-->
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
-<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                    <img height="300px" width="200px" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title3" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -252,9 +245,7 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id2" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-<!--                                    <img height="300dp" width="200dp" src="./images/movie/slide/12.jpg"/>-->
-                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
-<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                    <img height="300px" width="200px" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title2" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>
@@ -271,8 +262,7 @@
                             <span class="single-portfolio">
                                 <input type="hidden" id="id1" name="id" th:value="${movieInfo.movieId}"/>
                                 <a th:href="@{/detail(id=${movieInfo.movieId})}">
-                                   <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
-<!--                                    <img height="300dp" width="200dp" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>-->
+                                   <img height="300px" width="200px" th:src="@{'/poster/'+${movieInfo.movieId}+'.jpg'}"/>
                                 </a>
                                 <p id="title1" name="title" style="color:white;" th:text="${movieInfo.title}"></p>
                             </span>

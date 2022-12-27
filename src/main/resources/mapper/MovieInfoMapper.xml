@@ -25,6 +25,7 @@
             n.introduction as introduction,
             n.releaseYear as releaseYear
     </select>
+
     <select id="getMovieInfoByTitle" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n:Movie)
         WHERE n.title = #{movie_title}
@@ -36,6 +37,8 @@
         n.introduction as introduction,
         n.releaseYear as releaseYear
     </select>
+
+    <!--搜索电影，使用全文索引，按score排序 -->
     <select id="getMovieByTitle" resultType="com.web.movie.entity.MovieInfo">
         CALL db.index.fulltext.queryNodes("movieTitleIndex",#{movie_title}) yield node
         RETURN
