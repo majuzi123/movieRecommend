@@ -3,10 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>关于我们</title>
+    <style>
+        * {padding: 0;margin: 0}
+        body {height: 2000px}
+        #dd1 {width: 800px;height: 300px;position: absolute}
+        #dd1:hover .w div {width: 100%}
+        #dd1:hover span {opacity: 1;margin-top: -10px;margin-left: -10px}
+        #d1 {height: 50px;display: flex}
+        #d1 span {font-size: 20px;color: #02B2B5;opacity: 0;transition: all 0.1s;margin-left: -80px}
+        #d4 span {font-size: 20px;color: #02B2B5;opacity: 0;transition: all 0.1s;margin-left: -80px}
+        #d2 {width: 720px;height: 310px;background: url("/images/movie/back.png") no-repeat}
+        #d2:hover {box-shadow: 0px 8px 10px #484b49}
+        #d3 {width: 720px;height: 200px;word-wrap: break-word;margin-top: 10px}
+        #d4 {height: 50px;display: flex}
+        #dd2 {width: 800px;height: 300px;position: absolute;bottom: 0;transition: all 1s}
+        #dd2:hover .w div {width: 100%}
+        #dd2:hover span {opacity: 1;margin-top: -10px;margin-left: -10px}
+        #d5 {width: 350px;height: 310px;background: url("/images/movie/img.png") no-repeat;position: absolute;left: 0;margin-top: 15px}
+        #d5:hover {box-shadow: 0px 8px 10px #484b49}
+        #d6 {width: 300px;height: 310px;font-size: 16px;position: absolute;right: 110px}
+        #d6 li {list-style: none;margin-bottom: 20px}
+        #d6 a {text-decoration: none;cursor: pointer}
+        #d6 a:link {color: #02B2B5}
+        #d6 a:hover {color: deepskyblue;text-decoration: underline}
+        #d6 a:active {color: blue}
+        #d6 a:visited {color: #0da7d5
+        }
+        #dd3 {width: 80%;height: 800px;position: relative;left: 200px;top: 20px}
+        .w {flex: 1;height: 10px;background-color: #eee}
+        .w div {width: 10%;height: 10px;background-color: #02B2B5;transition: all 0.3s}
+    </style>
 </head>
 <body>
-<div>李尔牧云</div>
-<div>马搏</div>
-<div>徐帆</div>
+<div id="dd3">
+    <div id="dd1">
+        <div id="d1">
+            <span>关于我们</span>
+            <div class="w">
+                <div></div>
+            </div>
+        </div>
+        <div id="d2"></div>
+        <div id="d3">
+            本次项目开发了一个小型的
+            电影推荐系统：使用非关系型数据库组织和管理具有真实的海量数据，设计高效、
+            实用的推荐算法，实现针对用户的个性化推荐。本网站基于主流的springBoot框架开发，
+            后端使用neo4j图数据库存储信息，并部署在云服务器上，整个项目也部署在云服务器上。感谢大家的支持，希望能够
+            给大家带来最好的体验，如有问题和相关意见也可联系我们。
+        </div>
+    </div>
+    <div id="dd2">
+        <div id="d4">
+            <span>项目成员</span>
+            <div class="w">
+                <div></div>
+            </div>
+        </div>
+        <div id="d5"></div>
+        <div id="d6">
+            <ol>
+                <li><a href="#1">李尔牧云</a></li>
+                <li><a href="#2">马搏</a></li>
+                <li><a href="#3">徐帆</a></li>
+
+            </ol>
+        </div>
+    </div>
+</div>
 </body>
 </html>
