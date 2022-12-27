@@ -14,5 +14,6 @@ public interface MovieInfoMapper {
     List<Genre> getGenreById(int movie_id);
     List<Actor> getActorsById(int movie_id);
     List<Director> getDirectorsById(int movie_id);
+    List<MovieInfo> getNewMovieByGenre(int genre_id);
 
 }
