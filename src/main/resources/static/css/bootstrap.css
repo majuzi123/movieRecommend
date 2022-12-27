@@ -8775,7 +8775,7 @@ button.bg-dark:focus {
     text-align: right !important;
   }
   .text-lg-center {
-    text-align: center !important;
+    text-align: left !important;
   }
 }
 

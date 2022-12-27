@@ -62,7 +62,7 @@
 
     <select id="getNewMovieByGenre" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n:Movie)-[:IS_TYPE_OF]->(g:Genre)
-        WHERE g.gId=#{genre_id}
+        WHERE g.gId=#{genre_id} and n.releaseYear &lt;'2022'
         RETURN
             n.movieId as movieId,
             n.title as title,
