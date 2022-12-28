@@ -19,27 +19,27 @@ public class MovieController {
 
     @RequestMapping("/movie")
     public String toMovie(ModelMap map, HttpSession session)throws Exception{
-       /* if (session.getAttribute("status").equals("login")){
-            int id = (int) session.getAttribute("id");
-            List<MovieInfo> list=movieInfoService.getRecommendedMovies(id);
-            map.addAttribute("list",list);
+       if (session.getAttribute("status").equals("login")){
+            int user_id = (int) session.getAttribute("id");
+            List<MovieInfo> newRecommendMovies=movieInfoService.getRecommendMovies(user_id);
+            map.addAttribute("newRecommendMovies",newRecommendMovies);
         }
         else {
-            List<MovieInfo> list=movieInfoService.getHighScoreMovies();
-            map.addAttribute("list",list);
-        }*/
+            List<MovieInfo> highList=movieInfoService.getHighMovies();
+            map.addAttribute("newRecommendMovies",highList);
+        }
 
         List<MovieInfo> newCartoonMovies =movieInfoService.getNewMovieByGenre(5);
         List<MovieInfo> newLoveMovies=movieInfoService.getNewMovieByGenre(1);
         List<MovieInfo> newActionMovies=movieInfoService.getNewMovieByGenre(2);
         List<MovieInfo> newComedyMovies=movieInfoService.getNewMovieByGenre(6);
-        List<MovieInfo> newCrimeMovies=movieInfoService.getNewMovieByGenre(11);
+        //List<MovieInfo> newCrimeMovies=movieInfoService.getNewMovieByGenre(11);
 
         map.addAttribute("newCartoonMovies", newCartoonMovies);
         map.addAttribute("newLoveMovies",newLoveMovies);
         map.addAttribute("newActionMovies",newActionMovies);
         map.addAttribute("newComedyMovies",newComedyMovies);
-        map.addAttribute("newCrimeMovies",newCrimeMovies);
+        //map.addAttribute("newCrimeMovies",newCrimeMovies);
 
         return "movie";
     }

@@ -2,15 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.web.movie.mapper.MovieInfoMapper">
 
-    <select id="getNewMovies" resultType="com.web.movie.entity.MovieInfo">
-        MATCH (n:Movie)
+    <select id="getHighMovies" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (n1:Comment)-[:COMMENT_OF]-> (n2:Movie)
+        WITH n2.movieId AS mid,n2.title AS mtitle,collect(n1.commentId) AS common
         RETURN
-            n.movieId as movieId,
-            n.title as title,
-            n.region as region,
-            n.language as language,
-            n.introduction as introduction,
-            n.releaseYear as releaseYear
+            mid as movieId,mtitle as title
+        ORDER BY size(common) DESC
         LIMIT 6
     </select>
 
@@ -80,5 +77,34 @@
             n.releaseYear as releaseYear
         Order by n.releaseYear DESC
         LIMIT 6
+    </select>
+
+    <select id="calculateSimilarity" resultType="int">
+        MATCH (u1:User)-[:WRITED]->(r1:Comment)-[:COMMENT_OF]->(m:Movie)&lt;-[:COMMENT_OF]-(r2:Comment)&lt;-[:WRITED]-(u2:User)
+        WHERE u1.userId=#{user_id}
+        WITH
+            u1,u2,COUNT(m) AS movies_common,
+            SUM(r1.grading * r2.grading)/(SQRT(SUM(r1.grading^2)) * SQRT(SUM(r2.grading^2))) AS sim
+        WHERE movies_common >=3 AND sim >0.8
+        MERGE (u1)-[s:SIMILARITY]->(u2)
+        SET s.sim=sim
+        RETURN count(u2)
+    </select>
+
+    <select id="getRecommendMovies" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (user1:User)-[r:SIMILARITY]->(user2:User)
+        WHERE user1.userId=#{user_id}
+        WITH user1 as u1, user2 as u2, r as s
+        ORDER BY s.sim DESC LIMIT 5
+            MATCH (u2)-[:WRITED]->(c:Comment)-[:COMMENT_OF]->(m:Movie)
+            WITH u1, u2, s, m, c
+            WHERE NOT((u1)-[:WRITED]->(:Comment)-[:COMMENT_OF]->(m:Movie))
+            WITH
+                m.title AS mTitle,m.movieId AS mId,SUM(c.grading * s.sim)/SUM(s.sim) AS grade,COUNT(u2) AS num
+            RETURN
+                mId as movieId,
+                mTitle as title
+            ORDER BY grade DESC, num DESC
+            LIMIT 6
     </select>
 </mapper>

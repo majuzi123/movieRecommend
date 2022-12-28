@@ -17,23 +17,26 @@ public class MovieInfoServiceImpl implements MovieInfoService {
     private MovieInfoMapper movieInfoMapper;
 
     @Override
-    public List<MovieInfo> getNewMovies() {
-        return movieInfoMapper.getNewMovies();
+    public List<MovieInfo> getHighMovies() {
+        return movieInfoMapper.getHighMovies();
     }
 
     @Override
-    public List<MovieInfo> getRecommendMovies(int id) {
-        return null;
+    public List<MovieInfo> getRecommendMovies(int user_id) {
+        int commonUsers = movieInfoMapper.calculateSimilarity(user_id);
+        List<MovieInfo> recommendMovies;
+        if(commonUsers==0){
+            return movieInfoMapper.getHighMovies();
+        }else{
+            recommendMovies=movieInfoMapper.getRecommendMovies(user_id);
+        }
+        if(recommendMovies.size()<6) return movieInfoMapper.getHighMovies();
+        return recommendMovies;
     }
 
     @Override
     public MovieInfo getMovieById(int movie_id) {
         return movieInfoMapper.getMovieById(movie_id);
-    }
-
-    @Override
-    public MovieInfo getMovieInfoByTitle(String movie_title) {
-        return null;
     }
 
     @Override

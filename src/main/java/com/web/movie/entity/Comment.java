@@ -1,6 +1,6 @@
 package com.web.movie.entity;
 
-public class Comment implements Comparable<Comment>{
+public class Comment{
     private int commentId;
     private String content;
     private int grading;
@@ -77,8 +77,4 @@ public class Comment implements Comparable<Comment>{
                 '}';
     }
 
-    @Override
-    public int compareTo(Comment o) {
-        return grading > o.grading ? -1 : 1;
-    }
 }
