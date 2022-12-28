@@ -17,5 +17,6 @@ public interface MovieInfoMapper {
     List<MovieInfo> getNewMovieByGenre(int genre_id);
     int calculateSimilarity(int user_id);
     List<MovieInfo> getRecommendMovies(int user_id);
+    List<MovieInfo> getMovieOfSameDirector(int movie_id);
 
 }

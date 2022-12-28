@@ -60,4 +60,8 @@ public class MovieInfoServiceImpl implements MovieInfoService {
         return movieInfoMapper.getNewMovieByGenre(genre_id);
     }
 
+    @Override
+    public List<MovieInfo> getMovieOfSameDirector(int movie_id) {
+        return movieInfoMapper.getMovieOfSameDirector(movie_id);
+    }
 }

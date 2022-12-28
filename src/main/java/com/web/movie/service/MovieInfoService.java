@@ -16,5 +16,6 @@ public interface MovieInfoService {
     List<Actor> getActorsById(int movie_id);
     List<Director> getDirectorsById(int movie_id);
     List<MovieInfo> getNewMovieByGenre(int genre_id);
+    List<MovieInfo> getMovieOfSameDirector(int movie_id);
 
 }

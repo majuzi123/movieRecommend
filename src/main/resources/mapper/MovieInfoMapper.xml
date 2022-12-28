@@ -104,4 +104,18 @@
             LIMIT 6
     </select>
 
+    <select id="getMovieOfSameDirector" resultType="com.web.movie.entity.MovieInfo">
+        MATCH (movie1:Movie)-[r1:ACTED_IN]-(person1:Person)-[r2:ACTED_IN]->(movie2:Movie)
+        WHERE movie1.movieId=#{movie_id} and movie2.releaseYear &lt;'2022'
+        RETURN
+            movie2.movieId as movieId,
+            movie2.title as title,
+            movie2.region as region,
+            movie2.language as language,
+            movie2.introduction as introduction,
+            movie2.releaseYear as releaseYear
+        Order by movie2.releaseYear DESC
+        LIMIT 6
+    </select>
+
 </mapper>

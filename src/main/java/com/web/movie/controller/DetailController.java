@@ -28,6 +28,7 @@ public class DetailController {
         List<Genre> genreList = movieInfoService.getGenreById(id);
         List<Actor> actorList = movieInfoService.getActorsById(id);
         List<Director> directorList = movieInfoService.getDirectorsById(id);
+        List<MovieInfo> movieOfSameDirectorList=movieInfoService.getMovieOfSameDirector(id);
         movie.setGenreList(genreList);
         movie.setActorList(actorList);
         movie.setDirectorList(directorList);
@@ -35,6 +36,7 @@ public class DetailController {
         session.setAttribute("movieId", movie.getMovieId());
         map.addAttribute("movie", movie);
         map.addAttribute("commentList", commentList);
+        map.addAttribute("movieOfSameDirectorList",movieOfSameDirectorList);
         return "detail";
     }
 
