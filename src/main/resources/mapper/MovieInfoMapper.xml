@@ -85,7 +85,7 @@
         WITH
             u1,u2,COUNT(m) AS movies_common,
             SUM(r1.grading * r2.grading)/(SQRT(SUM(r1.grading^2)) * SQRT(SUM(r2.grading^2))) AS sim
-        WHERE movies_common >=3 AND sim >0.8
+        WHERE movies_common >=2 AND sim >0.8
         MERGE (u1)-[s:SIMILARITY]->(u2)
         SET s.sim=sim
         RETURN count(u2)
