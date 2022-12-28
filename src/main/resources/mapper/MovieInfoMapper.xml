@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.web.movie.mapper.MovieInfoMapper">
 
+    <!--推荐评分人数最多的电影 -->
     <select id="getHighMovies" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n1:Comment)-[:COMMENT_OF]-> (n2:Movie)
         WITH n2.movieId AS mid,n2.title AS mtitle,collect(n1.commentId) AS common
@@ -11,6 +12,16 @@
         LIMIT 6
     </select>
 
+    <!--搜索电影，使用全文索引，返回结果按score排序 -->
+    <select id="getMovieByTitle" resultType="com.web.movie.entity.MovieInfo">
+        CALL db.index.fulltext.queryNodes("movieTitleIndex",#{movie_title}) yield node
+        RETURN
+            node.movieId as movieId,
+            node.title as title
+        LIMIT 10
+    </select>
+
+    <!--通过Id检索电影 -->
     <select id="getMovieById" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n:Movie)
         WHERE n.movieId=#{movie_id}
@@ -23,27 +34,7 @@
             n.releaseYear as releaseYear
     </select>
 
-    <select id="getMovieInfoByTitle" resultType="com.web.movie.entity.MovieInfo">
-        MATCH (n:Movie)
-        WHERE n.title = #{movie_title}
-        RETURN
-        n.movieId as movieId,
-        n.title as title,
-        n.region as region,
-        n.language as language,
-        n.introduction as introduction,
-        n.releaseYear as releaseYear
-    </select>
-
-    <!--搜索电影，使用全文索引，按score排序 -->
-    <select id="getMovieByTitle" resultType="com.web.movie.entity.MovieInfo">
-        CALL db.index.fulltext.queryNodes("movieTitleIndex",#{movie_title}) yield node
-        RETURN
-            node.movieId as movieId,
-            node.title as title
-        LIMIT 10
-    </select>
-
+    <!--检索电影类别 -->
     <select id="getGenreById" resultType="com.web.movie.entity.Genre">
         MATCH (m:Movie)-[:IS_TYPE_OF]->(g:Genre)
         WHERE m.movieId=#{movie_id}
@@ -51,6 +42,7 @@
         g.type as type
     </select>
 
+    <!--获取演员列表 -->
     <select id="getActorsById" resultType="com.web.movie.entity.Actor">
         MATCH (p:Person)-[:ACTED_IN]->(m:Movie)
         WHERE m.movieId=#{movie_id}
@@ -58,6 +50,7 @@
             p.name as name
     </select>
 
+    <!--获取导演列表 -->
     <select id="getDirectorsById" resultType="com.web.movie.entity.Director">
         MATCH (p:Person)-[:DIRECTED]->(m:Movie)
         WHERE m.movieId=#{movie_id}
@@ -65,6 +58,7 @@
               p.name as name
     </select>
 
+    <!--按类别推荐电影 -->
     <select id="getNewMovieByGenre" resultType="com.web.movie.entity.MovieInfo">
         MATCH (n:Movie)-[:IS_TYPE_OF]->(g:Genre)
         WHERE g.gId=#{genre_id} and n.releaseYear &lt;'2022'
@@ -79,6 +73,7 @@
         LIMIT 6
     </select>
 
+    <!--计算余弦相似度 -->
     <select id="calculateSimilarity" resultType="int">
         MATCH (u1:User)-[:WRITED]->(r1:Comment)-[:COMMENT_OF]->(m:Movie)&lt;-[:COMMENT_OF]-(r2:Comment)&lt;-[:WRITED]-(u2:User)
         WHERE u1.userId=#{user_id}
@@ -91,6 +86,7 @@
         RETURN count(u2)
     </select>
 
+    <!--获取推荐列表 -->
     <select id="getRecommendMovies" resultType="com.web.movie.entity.MovieInfo">
         MATCH (user1:User)-[r:SIMILARITY]->(user2:User)
         WHERE user1.userId=#{user_id}
@@ -107,4 +103,5 @@
             ORDER BY grade DESC, num DESC
             LIMIT 6
     </select>
+
 </mapper>

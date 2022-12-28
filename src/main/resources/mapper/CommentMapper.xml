@@ -10,7 +10,7 @@
         SET c.commentId=id(c),c.content=#{comment.content},c.timeStamp=#{comment.timeStamp},c.grading=#{comment.grading},c.title=m.title
     </insert>
 
-    <!--查询影评 -->
+    <!--检索用户影评 -->
     <select id="getCommentsByUser" resultType="com.web.movie.entity.Comment">
         MATCH (u:User)-[:WRITED]->(c:Comment)-[:COMMENT_OF]->(m:Movie)
         WHERE u.userId=#{user_id}
@@ -19,9 +19,11 @@
             c.content as content,
             c.grading as grading,
             m.title as movieTitle
-        LIMIT 8
+        ORDER BY c.timeStamp DESC
+        LIMIT 10
     </select>
 
+    <!--检索电影影评 -->
     <select id="getCommentsByMovie" resultType="com.web.movie.entity.Comment">
         MATCH (u:User)-[:WRITED]->(c:Comment)-[:COMMENT_OF]->(m:Movie)
         WHERE m.movieId=#{movie_id}
@@ -35,12 +37,13 @@
         LIMIT 10
     </select>
 
+    <!--获取影评数量 -->
     <select id="getCommentCount" resultType="int">
         MATCH(c:Comment)
         RETURN count(c)
     </select>
 
-    <!-- 删除电影评价-->
+    <!--删除影评-->
     <delete id="deleteCommentById">
         MATCH (u:User)-[r1:WRITED]->(c:Comment)-[r2:COMMENT_OF]->(m:Movie)
         WHERE c.commentId=#{comment_id}

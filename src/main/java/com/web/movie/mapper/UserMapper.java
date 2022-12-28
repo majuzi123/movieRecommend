@@ -19,5 +19,4 @@ public interface UserMapper {
 
      void updateUserInfo(User userInfo);
 
-    List<User> getUsersByComment(int user_id);
 }

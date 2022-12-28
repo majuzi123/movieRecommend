@@ -15,5 +15,4 @@ public interface UserService {
     int register(String userName, String passWord);
     void updateUserInfo(User userInfo);
 
-   List<User> getUsersByComment(int user_id);
 }

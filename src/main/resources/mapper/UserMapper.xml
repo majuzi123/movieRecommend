@@ -12,6 +12,12 @@
     </select>
 
     <!--注册 -->
+    <insert id="addUser" parameterType="com.web.movie.entity.User">
+        CREATE (u:User)
+        SET u.userId=#{userId},u.userName=#{userName},u.passWord=#{passWord},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
+    </insert>
+
+    <!--获取用户个人信息 -->
     <select id="getUserInfoById" resultType="com.web.movie.entity.User">
         MATCH (u:User)
         WHERE u.userId=#{id}
@@ -23,6 +29,14 @@
             u.age as age
     </select>
 
+    <!--修改用户个人信息 -->
+    <update id="updateUserInfo" parameterType="com.web.movie.entity.User">
+        MATCH (u:User)
+              WHERE u.userId=#{userId}
+        SET u.userName=#{userName},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
+    </update>
+
+    <!--通过昵称检索用户 -->
     <select id="getUserByName" resultType="com.web.movie.entity.User">
         MATCH (u:User)
         WHERE u.userName=#{userName}
@@ -31,27 +45,9 @@
             u.passWord as passWord
     </select>
 
+    <!--获取注册用户数 -->
     <select id="getUserCount" resultType="int">
         MATCH (u:User) RETURN count(u)
     </select>
-
-    <!--查询评价过相同电影的用户 -->
-    <select id="getUsersByComment" resultType="com.web.movie.entity.User">
-        MATCH (u1:User)-[:WRITED]->(:Comment)-[:COMMENT_OF]->(m:Movie) &lt;-[:COMMENT_OF]-(:Comment)&lt;-[:WRITED]-(u2:User)
-        WHERE u1.userId=#{user_id} and  u2.userId &lt;&gt; u1.userId
-        RETURN
-        u2.userId as userId,
-        u2.userName as userName,
-    </select>
-    <insert id="addUser" parameterType="com.web.movie.entity.User">
-        CREATE (u:User)
-        SET u.userId=#{userId},u.userName=#{userName},u.passWord=#{passWord},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
-    </insert>
-
-    <update id="updateUserInfo" parameterType="com.web.movie.entity.User">
-        MATCH (u:User)
-        WHERE u.userId=#{userId}
-        SET u.userName=#{userName},u.QQNumber=#{QQNumber},u.email=#{email},u.age=#{age}
-    </update>
 
 </mapper>

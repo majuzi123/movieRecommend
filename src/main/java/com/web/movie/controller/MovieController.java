@@ -33,13 +33,11 @@ public class MovieController {
         List<MovieInfo> newLoveMovies=movieInfoService.getNewMovieByGenre(1);
         List<MovieInfo> newActionMovies=movieInfoService.getNewMovieByGenre(2);
         List<MovieInfo> newComedyMovies=movieInfoService.getNewMovieByGenre(6);
-        //List<MovieInfo> newCrimeMovies=movieInfoService.getNewMovieByGenre(11);
 
         map.addAttribute("newCartoonMovies", newCartoonMovies);
         map.addAttribute("newLoveMovies",newLoveMovies);
-        map.addAttribute("newActionMovies",newActionMovies);
         map.addAttribute("newComedyMovies",newComedyMovies);
-        //map.addAttribute("newCrimeMovies",newCrimeMovies);
+        map.addAttribute("newActionMovies",newActionMovies);
 
         return "movie";
     }
