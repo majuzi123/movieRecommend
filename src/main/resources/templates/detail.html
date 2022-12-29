@@ -160,8 +160,9 @@
         <div class="section-head" style="color: white">
             <h2>相关影片</h2>
         </div>
-        <div class="section-head" style="color: white" th:if="${movieOfSameDirectorList.isEmpty()}">
-            <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</h4>
+        <div class="section-head" style="color: white"
+             th:if="${movieOfSameDirectorList==null || movieOfSameDirectorList.isEmpty()}">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</p>
         </div>
 
         <div class="container">
