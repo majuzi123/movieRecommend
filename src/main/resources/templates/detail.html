@@ -160,11 +160,11 @@
         <div class="section-head" style="color: white">
             <h2>相关影片</h2>
         </div>
-        <div class="section-head" style="color: white" th:if="${movieOfSameDirectorList.isEmpty()}">
-            <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</h4>
-        </div>
+<!--        <div class="section-head" style="color: white" >-->
+<!--            <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</h4>-->
+<!--        </div>-->
 
-        <div class="container">
+        <div class="container" >
             <div class="row" style="padding-top: 10px;">
                 <div class="col-md-4" th:each="movieInfo : ${movieOfSameDirectorList}">
                     <span class="single-portfolio">
