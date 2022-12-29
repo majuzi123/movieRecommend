@@ -138,9 +138,9 @@
                     <h5 th:text="${movie.title}"/>
                     <div class="content" style="color: antiquewhite">
                         <br>
-                        <p th:text="'导演：'+${movie.directorList}"></p>
-                        <p th:text="'主演：'+${movie.actorList}"></p>
-                        <p th:text="'类型：'+${movie.genreList}"></p>
+                        <p th:text="'导演：'+${movie.directorList.replace('[',' ').replace(']',' ')}"></p>
+                        <p th:text="'主演：'+${movie.actorList.replace('[',' ').replace(']',' ')}"></p>
+                        <p th:text="'类型：'+${movie.genreList.replace('[',' ').replace(']',' ')}"></p>
                         <p th:text="'制片国家/地区：'+${movie.region}"></p>
                         <p th:text="'语言：'+${movie.language}"></p>
                         <p th:text="'上映时间：'+${movie.releaseYear}"></p>
@@ -162,7 +162,9 @@
         </div>
         <div class="section-head" style="color: white"
              th:if="${movieOfSameDirectorList==null || movieOfSameDirectorList.isEmpty()}">
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</p>
+            <br>
+            <br>
+            <h8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无相关影片</h8>
         </div>
 
         <div class="container">
